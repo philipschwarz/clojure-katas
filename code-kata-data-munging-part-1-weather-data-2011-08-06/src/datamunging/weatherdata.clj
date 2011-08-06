@@ -15,13 +15,13 @@
 
 (def file-lines (line-seq (clojure.java.io/reader wheather-data-file-name)))
 
-(defn non-asterisk? [character] (not (= \* character)))
+(defn not-an-asterisk? [character] (not (= \* character)))
 (defn is-space? [character] (= \space character))
 (defn is-digit? [character] (contains? #{\0 \1 \2 \3 \4 \5 \6 \7 \8 \9} character))
 
-(defn strip-asterisks [line] (filter non-asterisk? line))
+(defn strip-out-asterisks [line] (filter not-an-asterisk? line))
 
-(def cleaned-lines (map strip-asterisks file-lines))
+(def cleaned-lines (map strip-out-asterisks file-lines))
 
 (defn strip-leading-spaces [string] (drop-while is-space? string))
 
