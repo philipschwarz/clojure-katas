@@ -45,21 +45,21 @@
       (cons number 
             (extract-numbers (dec count) rest-of-text)))))
 
-(defn extract-excursion-details [line] 
+(defn extract-spread-details [line] 
   (let [[day maxtemp mintemp] (extract-numbers 3 line)]
-    {:day day :excursion (- maxtemp mintemp)}))
+    {:day day :spread (- maxtemp mintemp)}))
 
-(def line-reading-details (map extract-excursion-details data-lines))
+(def line-reading-details (map extract-spread-details data-lines))
 
-(defn excursion-comparator [{day1 :day excursion1 :excursion } {day2 :day excursion2 :excursion }]
-  (cond (> excursion1 excursion2) -1
-        (= excursion1 excursion2) 0
+(defn spread-comparator [{day1 :day spread1 :spread } {day2 :day spread2 :spread }]
+  (cond (> spread1 spread2) -1
+        (= spread1 spread2) 0
         :else 1))
 
-(def line-reading-details-by-descending-excursion (sort excursion-comparator line-reading-details ))
+(def line-reading-details-by-descending-spread (sort spread-comparator line-reading-details ))
 
-(def dates-by-descending-excursions (map :day line-reading-details-by-descending-excursion))
+(def dates-by-descending-spreads (map :day line-reading-details-by-descending-spread))
 
-(def day-with-greatest-excursion (first dates-by-descending-excursions )) 
+(def day-with-greatest-spread (first dates-by-descending-spreads )) 
 
-(println "the day with the greatest excursion is" day-with-greatest-excursion)
+(println "the day with the greatest spread is" day-with-greatest-spread)
